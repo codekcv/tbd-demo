@@ -50,3 +50,7 @@ next-env.d.ts
 # convex: _generated IS committed on purpose, so CI can typecheck without
 # Convex credentials. Only local deployment state is ignored.
 /convex/.env.local
+
+# Added by `vercel link`. Its blanket .env* is dropped: .env* is already covered
+# above, where .env.example is deliberately negated back in.
+.vercel

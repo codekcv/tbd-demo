@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { ConvexStatus } from "@/components/convex-status";
 
 const TOKENS = [
   { name: "primary", className: "bg-primary" },
@@ -17,6 +18,7 @@ export default function Home() {
           tbd-demo
         </p>
         <h1 className="text-4xl font-medium tracking-tight">Concept Scoreboard</h1>
+        <ConvexStatus />
         <p className="text-ink max-w-prose">
           Placeholder. The pipeline is what matters right now: if you are reading this on the
           production URL, a commit to <code className="font-mono text-sm">main</code> reached

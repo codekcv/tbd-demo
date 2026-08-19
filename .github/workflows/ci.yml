@@ -41,8 +41,13 @@ jobs:
       - name: Unit tests
         run: npm test
 
+      # NEXT_PUBLIC_* is inlined at build time and ships to the browser anyway, so this
+      # is a repository variable rather than a secret. It points at the dev deployment;
+      # give CI its own deployment if the tests ever start writing data.
       - name: Build
         run: npm run build
+        env:
+          NEXT_PUBLIC_CONVEX_URL: ${{ vars.NEXT_PUBLIC_CONVEX_URL }}
 
       # Deliberately not cached. Caching the browser saved about 30 seconds and left
       # the system-dependency install on a separate path, which hung on apt and burned
@@ -52,6 +57,8 @@ jobs:
 
       - name: End-to-end tests
         run: npm run test:e2e
+        env:
+          NEXT_PUBLIC_CONVEX_URL: ${{ vars.NEXT_PUBLIC_CONVEX_URL }}
 
       - name: Upload Playwright report
         if: ${{ !cancelled() }}
