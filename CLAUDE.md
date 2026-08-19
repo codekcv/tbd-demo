@@ -47,8 +47,9 @@ before assuming a Radix API.
 
 ## Design tokens
 
-Palette values in `app/globals.css` are ported from `myb-ui` so the demo looks like a product the
-team recognises. Token names are shadcn's so its components inherit the look.
+The palette lives in `app/globals.css`. Token names are shadcn's, so its components inherit it
+without patching. The three semantic colours are signal lights: `warning` for a partial rollout,
+`destructive` for a kill, `success` for a full release. Use them for that, not decoratively.
 
 - Reach for a semantic token (`bg-primary`, `text-muted-foreground`), not a raw colour.
 - The smallest permitted UI text is 11px, which is `text-2xs`. Nothing smaller ships.
