@@ -28,8 +28,9 @@ shadcn/ui, Vitest and Playwright, GitHub Actions and Vercel.
 One repository on purpose. A separate backend would mean two trunks and cross-repo pull request
 pairs, which is the coordination pressure that pushes teams back toward long-lived branches.
 
-Design tokens are ported from `myb-ui` so the demo reads as a familiar product. Nothing else is
-carried over from that project.
+The palette is the project's own, in `app/globals.css`. "Trunk" is a railway and telecom term, so
+the identity follows: a petrol trunk line, and amber, red, and green as signals for a partial
+rollout, a kill, and a full release.
 
 ## Getting started
 

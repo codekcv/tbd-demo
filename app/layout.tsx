@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-// No webfont on purpose. myb-ui ships none, so the system stack defined in globals.css
-// is what the product actually looks like.
-
 export const metadata: Metadata = {
   title: "Concept Scoreboard",
   description:

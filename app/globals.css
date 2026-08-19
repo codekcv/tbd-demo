@@ -4,10 +4,13 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Palette values are ported from myb-ui's src/index.css so the demo reads as one of our
-   products on a projector. Token NAMES are shadcn's, so its components inherit the look
-   without patching. Channel values are kept in the original HSL form to keep the line back
-   to the source obvious. */
+/* Palette grounded in the subject: "trunk" is borrowed from railway and telecom, so the
+   identity is a trunk line and its signals. Petrol green-blue carries the brand, and the
+   three semantic colours are signal lights: amber for a partial rollout, red for a kill,
+   green for fully released. Neutrals are biased toward the primary rather than left as a
+   flat grey, so the whole surface reads as one system.
+
+   Token names are shadcn's, so its components inherit the palette without patching. */
 
 @theme inline {
   --color-background: var(--background);
@@ -29,7 +32,7 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* myb-ui additions that shadcn has no equivalent for */
+  /* Additions shadcn has no equivalent for */
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
   --color-brand-muted: var(--brand-muted);
@@ -55,7 +58,9 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* myb-ui ships no webfont, so the system stack is what it actually looks like */
+  /* No webfont. A CI dashboard should render instantly on any machine, and the system
+     stack costs nothing to load. Mono is a real second role here: branch names, flag
+     keys, commands, and anything with digits that has to line up. */
   --font-sans:
     ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
     sans-serif;
@@ -63,7 +68,8 @@
     ui-monospace, "Cascadia Mono", "Segoe UI Mono", SFMono-Regular, Consolas, Menlo, monospace;
   --font-heading: var(--font-sans);
 
-  /* 11px, the documented floor for UI text in myb-ui. Nothing smaller ships. */
+  /* 11px. The smallest UI text this project ships; anything below stops being readable
+     on a projector, which is where this app is meant to be seen. */
   --text-2xs: 0.6875rem;
   --text-2xs--line-height: 1rem;
 
@@ -76,114 +82,111 @@
 :root {
   --radius: 0.5rem;
 
-  /* The page ground is myb-ui's --body-background: a 5% violet wash over white, flattened.
-     Cards sit on top of it in pure white, which is what gives the UI its layering. */
-  --background: hsl(270 100% 99.2%);
-  --foreground: hsl(0 0% 3.9%);
+  /* Not pure white: a trace of the primary's hue, so cards in true white lift off it. */
+  --background: hsl(180 16% 96.5%);
+  --foreground: hsl(185 33% 8%);
   --card: hsl(0 0% 100%);
-  --card-foreground: hsl(0 0% 3.9%);
+  --card-foreground: hsl(185 33% 8%);
   --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(0 0% 3.9%);
+  --popover-foreground: hsl(185 33% 8%);
 
-  /* --saas-primary-600. myb-ui's own --primary is near-black, but the brand violet is what
-     makes the product recognisable, so it takes the primary slot here. */
-  --primary: hsl(258.78 63.29% 59.41%);
+  /* Petrol. 5.81:1 on card white, so it is safe for body text as well as fills. */
+  --primary: hsl(184 80% 26%);
   --primary-foreground: hsl(0 0% 100%);
 
-  --secondary: hsl(0 0% 96.1%);
-  --secondary-foreground: hsl(0 0% 9%);
-  --muted: hsl(0 0% 91.9%);
-  /* 41% rather than 45.1%: myb-ui darkened this for WCAG AA on --muted. */
-  --muted-foreground: hsl(0 0% 41%);
+  --secondary: hsl(180 14% 93%);
+  --secondary-foreground: hsl(185 33% 12%);
+  --muted: hsl(180 12% 90%);
+  --muted-foreground: hsl(185 9% 39%);
 
-  /* --saas-primary-accent over --saas-primary-700 */
-  --accent: hsl(270 100% 97.61%);
-  --accent-foreground: hsl(258.05 53.85% 51.57%);
+  --accent: hsl(176 26% 93%);
+  --accent-foreground: hsl(186 88% 22%);
 
-  /* 50% rather than 55%: darkened for AA against near-white foreground. */
-  --destructive: hsl(0 70% 50%);
-  --border: hsl(0 0% 89.8%);
-  --input: hsl(0 0% 89.8%);
-  --ring: hsl(258.78 63.29% 59.41%);
+  --destructive: hsl(6 61% 44%);
+  --border: hsl(180 14% 88%);
+  --input: hsl(180 14% 88%);
+  --ring: hsl(184 80% 26%);
 
-  --brand: hsl(258.78 63.29% 59.41%);
+  --brand: hsl(184 80% 26%);
   --brand-foreground: hsl(0 0% 100%);
-  --brand-muted: hsl(265.31 88.89% 85.88%);
-  --surface: hsl(210 20% 98%);
-  --success: hsl(152.13 77.11% 39.41%);
+  --brand-muted: hsl(178 33% 75%);
+  --surface: hsl(180 20% 98%);
+
+  /* Semantic signals. Each is darkened until it clears 4.5:1 against white, because they
+     are used as text and on filled chips, not only as dots. */
+  --success: hsl(137 51% 31%);
   --success-foreground: hsl(0 0% 100%);
-  --warning: hsl(26.97 89.34% 52.16%);
+  --warning: hsl(35 90% 35%);
   --warning-foreground: hsl(0 0% 100%);
-  --ink: hsl(216 17% 30%);
+  --ink: hsl(185 15% 20%);
 
-  --chart-1: hsl(258.78 63.29% 59.41%);
-  --chart-2: hsl(261.6 84.75% 76.86%);
-  --chart-3: hsl(152.13 77.11% 39.41%);
-  --chart-4: hsl(26.97 89.34% 52.16%);
-  --chart-5: hsl(216 17% 30%);
+  --chart-1: hsl(184 80% 26%);
+  --chart-2: hsl(177 44% 44%);
+  --chart-3: hsl(137 51% 31%);
+  --chart-4: hsl(35 90% 35%);
+  --chart-5: hsl(185 9% 39%);
 
-  --sidebar: hsl(210 20% 98%);
-  --sidebar-foreground: hsl(0 0% 3.9%);
-  --sidebar-primary: hsl(258.78 63.29% 59.41%);
+  --sidebar: hsl(180 20% 98%);
+  --sidebar-foreground: hsl(185 33% 8%);
+  --sidebar-primary: hsl(184 80% 26%);
   --sidebar-primary-foreground: hsl(0 0% 100%);
-  --sidebar-accent: hsl(270 100% 97.61%);
-  --sidebar-accent-foreground: hsl(258.05 53.85% 51.57%);
-  --sidebar-border: hsl(0 0% 89.8%);
-  --sidebar-ring: hsl(258.78 63.29% 59.41%);
+  --sidebar-accent: hsl(176 26% 93%);
+  --sidebar-accent-foreground: hsl(186 88% 22%);
+  --sidebar-border: hsl(180 14% 88%);
+  --sidebar-ring: hsl(184 80% 26%);
 }
 
 .dark {
-  --background: hsl(210 5% 8%);
-  --foreground: hsl(0 0% 98%);
-  --card: hsl(0 0% 3.9%);
-  --card-foreground: hsl(0 0% 98%);
-  --popover: hsl(0 0% 3.9%);
-  --popover-foreground: hsl(0 0% 98%);
+  --background: hsl(180 21% 6%);
+  --foreground: hsl(180 12% 91%);
+  --card: hsl(183 19% 9%);
+  --card-foreground: hsl(180 12% 91%);
+  --popover: hsl(183 19% 9%);
+  --popover-foreground: hsl(180 12% 91%);
 
-  /* myb-ui's dark --saas-primary-text. Light enough to need dark text on top. */
-  --primary: hsl(248 100% 85%);
-  --primary-foreground: hsl(0 0% 9%);
+  /* Lifted well above the light value. The same petrol at 26% lightness would sit at
+     roughly 1.5:1 on this ground and be unreadable. Each theme is measured separately. */
+  --primary: hsl(177 48% 57%);
+  --primary-foreground: hsl(185 33% 8%);
 
-  --secondary: hsl(0 0% 14.9%);
-  --secondary-foreground: hsl(0 0% 98%);
-  --muted: hsl(0 0% 21.1%);
-  /* Deliberately NOT darkened in dark mode: it already clears AA, and darkening
-     would make the pairing worse. Each theme is measured independently. */
-  --muted-foreground: hsl(0 0% 63.9%);
-  --accent: hsl(0 0% 14.9%);
-  --accent-foreground: hsl(0 0% 98%);
+  --secondary: hsl(183 14% 15%);
+  --secondary-foreground: hsl(180 12% 91%);
+  --muted: hsl(183 12% 18%);
+  --muted-foreground: hsl(180 9% 66%);
 
-  /* 48% rather than the light theme's 50%: this token carries 80% saturation against
-     light's 70%, and the extra saturation drops 50% just under the AA floor. */
-  --destructive: hsl(0 80% 48%);
-  --border: hsl(0 0% 14.9%);
-  --input: hsl(0 0% 14.9%);
-  --ring: hsl(248 100% 85%);
+  --accent: hsl(183 14% 15%);
+  --accent-foreground: hsl(177 48% 70%);
 
-  --brand: hsl(248 100% 85%);
-  --brand-foreground: hsl(0 0% 9%);
-  --brand-muted: hsl(258 30% 35%);
-  --surface: hsl(0 0% 8%);
-  --success: hsl(152 60% 55%);
-  --success-foreground: hsl(0 0% 9%);
-  --warning: hsl(27 85% 62%);
-  --warning-foreground: hsl(0 0% 9%);
-  --ink: hsl(0 0% 90%);
+  --destructive: hsl(6 72% 62%);
+  --border: hsl(183 14% 18%);
+  --input: hsl(183 14% 18%);
+  --ring: hsl(177 48% 57%);
 
-  --chart-1: hsl(248 100% 85%);
-  --chart-2: hsl(261.6 84.75% 76.86%);
-  --chart-3: hsl(152 60% 55%);
-  --chart-4: hsl(27 85% 62%);
-  --chart-5: hsl(0 0% 63.9%);
+  --brand: hsl(177 48% 57%);
+  --brand-foreground: hsl(185 33% 8%);
+  --brand-muted: hsl(180 25% 30%);
+  --surface: hsl(183 19% 9%);
 
-  --sidebar: hsl(0 0% 8%);
-  --sidebar-foreground: hsl(0 0% 98%);
-  --sidebar-primary: hsl(248 100% 85%);
-  --sidebar-primary-foreground: hsl(0 0% 9%);
-  --sidebar-accent: hsl(0 0% 14.9%);
-  --sidebar-accent-foreground: hsl(0 0% 98%);
-  --sidebar-border: hsl(0 0% 14.9%);
-  --sidebar-ring: hsl(248 100% 85%);
+  --success: hsl(140 45% 55%);
+  --success-foreground: hsl(185 33% 8%);
+  --warning: hsl(35 82% 58%);
+  --warning-foreground: hsl(185 33% 8%);
+  --ink: hsl(180 10% 84%);
+
+  --chart-1: hsl(177 48% 57%);
+  --chart-2: hsl(184 40% 40%);
+  --chart-3: hsl(140 45% 55%);
+  --chart-4: hsl(35 82% 58%);
+  --chart-5: hsl(180 9% 66%);
+
+  --sidebar: hsl(183 19% 9%);
+  --sidebar-foreground: hsl(180 12% 91%);
+  --sidebar-primary: hsl(177 48% 57%);
+  --sidebar-primary-foreground: hsl(185 33% 8%);
+  --sidebar-accent: hsl(183 14% 15%);
+  --sidebar-accent-foreground: hsl(177 48% 70%);
+  --sidebar-border: hsl(183 14% 18%);
+  --sidebar-ring: hsl(177 48% 57%);
 }
 
 @layer base {
