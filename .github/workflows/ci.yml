@@ -44,22 +44,11 @@ jobs:
       - name: Build
         run: npm run build
 
-      # Cached separately from node_modules: the browser download is the slowest
-      # step in the job and it only changes when Playwright does.
-      - name: Cache Playwright browsers
-        id: playwright-cache
-        uses: actions/cache@v5
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-
+      # Deliberately not cached. Caching the browser saved about 30 seconds and left
+      # the system-dependency install on a separate path, which hung on apt and burned
+      # the whole 10 minute budget. One unconditional install is slower and reliable.
       - name: Install Playwright browsers
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps chromium
-
-      - name: Install Playwright system deps
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: npx playwright install-deps chromium
 
       - name: End-to-end tests
         run: npm run test:e2e
